@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>User Interface</title>
+  <style>
+    /* CSS styles for the interface */
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>User Interface</h1>
+
+    <!-- User login form -->
+    <div id="loginForm">
+      <h2>Login</h2>
+      <label for="username">Username:</label>
+      <input type="text" id="username" placeholder="Enter your username">
+      <label for="password">Password:</label>
+      <input type="password" id="password" placeholder="Enter your password">
+      <button onclick="login()">Login</button>
+    </div>
+
+    <!-- User update form -->
+    <div id="updateForm" style="display: none;">
+      <h2>Update Information</h2>
+      <label for="name">Name:</label>
+      <input type="text" id="name" placeholder="Enter your name">
+      <label for="email">Email:</label>
+      <input type="text" id="email" placeholder="Enter your email">
+      <button onclick="updateInformation()">Update</button>
+    </div>
+  </div>
+
+  <script>
+    // JavaScript code for handling user interactions
+    function login() {
+      // Perform authentication and validation here
+      // For simplicity, let's assume the login is successful
+      showUpdateForm();
+    }
+
+    function showUpdateForm() {
+      document.getElementById('loginForm').style.display = 'none';
+      document.getElementById('updateForm').style.display = 'block';
+    }
+
+    function updateInformation() {
+      // Perform information update and validation here
+      // You can retrieve values using document.getElementById('elementId').value
+      // For simplicity, let's assume the update is successful
+      alert('Information updated successfully!');
+    }
+
+
+    //php
+    function login() {
+        var username = document.getElementById('username').value;
+        var password = document.getElementById('password').value;
+
+        // Send login request to the server
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState === 4 && this.status === 200) {
+            if (this.responseText === 'success') {
+                showUpdateForm();
+            } else {
+                alert('Invalid login credentials!');
+            }
+            }
+        };
+        xhttp.open('POST', 'login.php', true);
+        xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhttp.send('username=' + username + '&password=' + password);
+        }
+
+        function updateInformation() {
+        var name = document.getElementById('name').value;
+        var email = document.getElementById('email').value;
+
+        // Send update request to the server
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState === 4 && this.status === 200) {
+            if (this.responseText === 'success') {
+                alert('Information updated successfully!');
+            } else {
+                alert('Failed to update information!');
+            }
+            }
+        };
+        xhttp.open('POST', 'update_information.php', true);
+        xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhttp.send('name=' + name + '&email=' + email);
+        }
+
+  </script>
+</body>
+</html>
