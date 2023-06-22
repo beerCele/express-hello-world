@@ -11,5 +11,5 @@ server.headersTimeout = 120 * 1000;
 
 const fs = require("fs");
 const htmlFilePath = "index.html";
-const html = fs.readFileSync(htmlFilePath, "utf8");
+const html = fs.readFileSync(htmlFilePath);
 
